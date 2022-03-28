@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: mp1-test-app
-          image: mp1-test-app
+          image: docker.io/oescal/mec-mp1-app-test:latest
           ports:
             - containerPort: 80
           env:
@@ -26,4 +26,5 @@ spec:
             # Application instance identifier
             - name: APP_INSTANCE_ID
               value: "997fc80a-cfc1-498a-b77f-608f09506e86"
-      imagePullPolicy: IfNotPresent
+      imagePullSecrets:
+      - name: regcred

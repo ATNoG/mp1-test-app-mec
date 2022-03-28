@@ -9,7 +9,8 @@ vnfd:
   - id: default-df
   kdu:
   - name: mp1_test
-    helm-chart: launch_mp1_test
+    helm-chart: local/launch_mp1_test
+    helm-version: v3
   ext-cpd:
   - id: mgmt-ext
     k8s-cluster-net: mgmt-net
