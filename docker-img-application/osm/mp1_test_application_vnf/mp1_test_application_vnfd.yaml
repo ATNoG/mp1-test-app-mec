@@ -9,7 +9,7 @@ vnfd:
   - id: default-df
   kdu:
   - name: mp1_test
-    helm-chart: local/launch_mp1_test
+    helm-chart: launch_mp1_test # local/launch_mp1_test
     helm-version: v3
   ext-cpd:
   - id: mgmt-ext
