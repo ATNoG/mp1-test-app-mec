@@ -1,0 +1,2 @@
+2314da610172d8bc6b9099b37a8b56cf	mp1_test_application_ns/mp1_test_application_nsd.yaml
+c4855236abf383ec4cffe4a43ad3eecd	mp1_test_application_ns/README.md

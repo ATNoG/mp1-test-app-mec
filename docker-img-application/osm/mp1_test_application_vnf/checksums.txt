@@ -1,0 +1,7 @@
+34f0122fc459e248d393598ee1e232d0	mp1_test_application_vnf/README.md
+25d1df4a6730de8569358faf109e43b9	mp1_test_application_vnf/mp1_test_application_vnfd.yaml
+997a0bf8e358718151995fa0a2ae74d7	mp1_test_application_vnf/helm-chart-v3s/charts/index.yaml
+21758f20643360fb8ed71ec969f298df	mp1_test_application_vnf/helm-chart-v3s/charts/launch_mp1_test-0.1.0.tgz
+6b24034650176ab194ce7150775e7423	mp1_test_application_vnf/helm-chart-v3s/launch_mp1_test/Chart.yaml
+5abf2297fa966fcaf137d8b31445835d	mp1_test_application_vnf/helm-chart-v3s/launch_mp1_test/templates/service.yaml
+a2213686ed81fb3c9983a539880558c5	mp1_test_application_vnf/helm-chart-v3s/launch_mp1_test/templates/deployment.yaml
