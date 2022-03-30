@@ -1,0 +1,6 @@
+[submodule "docker-img-application/osm/mp1_test_application_vnf/test/mod/operator"]
+	path = docker-img-application/osm/mp1_test_application_vnf/test/mod/operator
+	url = https://github.com/canonical/operator
+[submodule "docker-img-application/osm/mp1_test_application_vnf/test/mod/charms.osm"]
+	path = docker-img-application/osm/mp1_test_application_vnf/test/mod/charms.osm
+	url = https://github.com/charmed-osm/charms.osm

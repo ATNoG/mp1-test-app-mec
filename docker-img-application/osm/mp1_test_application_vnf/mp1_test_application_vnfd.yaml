@@ -7,6 +7,38 @@ vnfd:
   mgmt-cp: mgmt-net
   df:
   - id: default-df
+    lcm-operations-configuration:
+      operate-vnf-op-config:
+        day1-2:
+        - execution-environment-list:
+          - id: controller-init-ee
+            juju:
+              charm: test
+              proxy: true
+          # - id: controller-requirements-ee
+          #   juju:
+          #     charm: k8s_osm_requirements
+          #     proxy: true
+          id: controller
+          initial-config-primitive:
+          # - execution-environment-ref: controller-init-ee
+          #   name: config
+          #   parameter:
+          #   - name: ssh-hostname
+          #     value: <rw_mgmt_ip>
+          #   - name: ssh-username
+          #     value: <controller_username>
+          #   - name: ssh-password
+          #     value: <controller_password>
+          #   - name: entity
+          #     value: controller
+          #   seq: 1
+          - execution-environment-ref: controller-init-ee
+            name: test
+            parameter:
+            - name: osm
+              value: <OSM>
+            seq: 1
   kdu:
   - name: mp1_test
     helm-chart: launch_mp1_test
