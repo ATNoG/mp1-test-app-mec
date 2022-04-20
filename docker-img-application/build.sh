@@ -2,4 +2,4 @@
 
 set -eu
 
-docker build --tag unibo-test-mec-application:latest .
+docker build --tag mep-test:latest .
