@@ -16,13 +16,14 @@ spec:
     spec:
       containers:
         - name: mp1-test-app
-          image: docker.io/oescal/mec-mp1-app-test:latest
+          image: ghcr.io/oescal/mp1-test-app-mec:latest
+          imagePullPolicy: IfNotPresent
           ports:
-            - containerPort: 80
+            - containerPort: 8090
           env:
             # MEC Platform endpoint
             - name: MEC_BASE
-              value: "http://172.17.0.2"
+              value: "http://10.0.13.232:30080"
             # Application instance identifier
             - name: APP_INSTANCE_ID
               value: "997fc80a-cfc1-498a-b77f-608f09506e86"
