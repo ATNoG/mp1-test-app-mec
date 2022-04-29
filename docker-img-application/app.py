@@ -464,6 +464,16 @@ def configuration():
         service_data = r['service_data']
         return "ok"
 
+@app.before_first_request
+def automatic_mep_app():
+    # Say we are ready
+    notification_confirm_ready()
+    # Create service - UNIBO naming is weird
+    service_subscribe()
+    # Create subscription
+    notifications_subscribe()
+    # Obtain my services
+    services()
 
 if __name__=='__main__':
     try:
