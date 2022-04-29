@@ -39,6 +39,7 @@ import datetime
 import subprocess
 import time
 from flask import Flask, Response, request
+import threading
 
 def get_nic():
     for k in os.listdir('/sys/class/net'):
@@ -464,8 +465,8 @@ def configuration():
         service_data = r['service_data']
         return "ok"
 
-@app.before_first_request
 def automatic_mep_app():
+    time.sleep(2)
     # Say we are ready
     notification_confirm_ready()
     # Create service - UNIBO naming is weird
@@ -483,4 +484,5 @@ if __name__=='__main__':
         # No configuration for now, will except when a request to an
         # invalid endpoint will be made.
         pass
+    threading.Thread(target=lambda: automatic_mep_app()).start()
     app.run("0.0.0.0", port=8090)
