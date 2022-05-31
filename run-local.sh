@@ -7,6 +7,7 @@ cd docker-img-application
 cd -
 
 docker run --rm -ti \
-        -e MEC_BASE="http://172.17.0.3:80" \
+	--network="host" \
+        -e MEC_BASE="http://0.0.0.0:8080" \
         -e APP_INSTANCE_ID="997fc80a-cfc1-498a-b77f-608f09506e86" \
-	unibo-test-mec-application
+	mep-test:latest

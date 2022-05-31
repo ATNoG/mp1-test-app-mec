@@ -8,7 +8,7 @@
 		<!-- Bootstrap CSS -->
 		<link rel="stylesheet" href="bootstrap.min.css">
 
-		<title>UniBO Test MEC Application</title>
+		<title>IT Test MEC Application</title>
 		<style>
 			html {
 				background-color:#212529;
@@ -183,14 +183,14 @@
 			<form href="#">
 			    	<div class="form-group">
 			    		<label for="mec_base">MEC base address</label>
-			    		<input type="text" class="form-control" id="mec_base" placeholder="http://mec_base_address:80">
+			    		<input type="text" class="form-control" id="mec_base" placeholder="http://mec_base_address:8090">
 			    		<small id="mec_basehelp" class="form-text text-muted">Should be the complete endpoint without the /mec_ part</small>
 			    	</div>
 
 			    	<div class="form-group">
 			    		<label for="target_service">Target Service Name</label>
 			    		<input type="text" class="form-control" id="target_service"
-							placeholder="mMTCSlicingService">
+							placeholder="UATestService">
 			    		<small id="target_servicehelp" class="form-text text-muted">
 											If empty or wrong the application will use the
 											Other Application URI value.
@@ -199,7 +199,7 @@
 
 			    	<div class="form-group">
 			    		<label for="other_application_uri">Other application URI</label>
-			    		<input type="text" class="form-control" id="other_application_uri" placeholder="http://other_application:80/api/v1/testendpoint">
+			    		<input type="text" class="form-control" id="other_application_uri" placeholder="http://other_application:8090/api/v1/testendpoint">
 			    		<small id="other_application_urihelp" class="form-text text-muted">You
 											can leave the field blank to automatically get the
 							endpoint when you get the service list if the service match the Service Name</small>

@@ -27,6 +27,7 @@ import json
 import requests
 import datetime
 import subprocess
+import time
 from flask import Flask, Response, request
 
 def get_nic():
@@ -78,16 +79,15 @@ target_service = ''
 
 # Default service data, this can be edited within the application
 service_data = {
-    "serName": "UniboMECService",
+    "serName": "ITMECService",
     "serCategory": {
-        "href": "/example/catalogue1",
+        "href": "http://10.0.0.0/example/catalogue1",
         "id": "id12345",
         "name": "RNI",
         "version": "v1"
     },
     "version": "ServiceVersion1",
     "state": "ACTIVE",
-    "transportId": "Rest1",
     "transportInfo": {
         "id": 'TransId12345' ,
         "name": "REST",
@@ -95,10 +95,14 @@ service_data = {
         "type": "REST_HTTP",
         "protocol": "HTTP",
         "version": "2.0",
-        "endpoint": { EXTERNAL_ENDPOINT },
+        "endpoint": {
+            "addresses":[
+                {"host":"192.168.47.43","port":8090}
+            ]
+        },
         "security": {
             "oAuth2Info": {
-                "grantTypes": [ ],
+                "grantTypes": ["OAUTH2_AUTHORIZATION_CODE"],
                 "tokenEndpoint": ""
             }
         },
@@ -107,7 +111,7 @@ service_data = {
     "serializer": "JSON",
     "scopeOfLocality": "MEC_SYSTEM",
     "consumedLocalOnly": True,
-    "isLocal": True
+    "isLocal": True,
 }
 
 # The application has been notified
@@ -168,7 +172,7 @@ def service_subscribe():
     r = requests.post(query_base, data=json.dumps(data), headers=headers)
 
     # XXX we don't have any slash in the url?
-    service_id = r.headers['location'].split('/')[-1]
+    service_id = r.headers['Location'].split('/')[-2]
 
     return 'New service_id: {}'.format(service_id)
 
@@ -239,13 +243,12 @@ def notifications_subscribe():
     # Catch all notification endpoint
     data = {
       "subscriptionType": "SerAvailabilityNotificationSubscription",
-      "callbackReference": "string",
-      "_links": {
-        "self": {
-          "href": CALLBACK_URL
-        }
+      "callbackReference": f"http://192.168.47.43{CALLBACK_URL}:8090",
+      "filteringCriteria":
+          {
+              "serNames":["ITTESTService"]
+          }
       }
-    }
 
     query_base = "{}/{}/applications/{}/subscriptions".format(
             mec_base,
@@ -256,8 +259,7 @@ def notifications_subscribe():
     headers = {"content-type": "application/json"}
     r = requests.post(query_base, data=json.dumps(data), headers=headers)
 
-    # XXX we don't have any slash in the url?
-    service_id = r.headers['location'].split('/')[-1]
+    service_id = r.headers['Location'].split("/")[-1]
 
     return 'New notification_id: {}'.format(service_id)
 
@@ -461,4 +463,4 @@ if __name__=='__main__':
         # No configuration for now, will except when a request to an
         # invalid endpoint will be made.
         pass
-    app.run("0.0.0.0", port=80)
+    app.run("0.0.0.0", port=8090)
