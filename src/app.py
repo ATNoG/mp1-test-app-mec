@@ -2,6 +2,7 @@
 
 # unibo-test-application - Testbed for MEC API 011 applications
 # This application is part of unibo-test-mec
+# Copyright (C) 2022  IT: Miguel Mota   <miguel.mota@av.it.pt>
 # Copyright (C) 2020  Davide Berardi   <berardi.dav@gmail.com>
 #                     Davide Borsatti  <davide.borsatti@studio.unibo.it>
 #                     Franco Callegati <franco.callegati@unibo.it>
