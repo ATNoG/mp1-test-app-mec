@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: mp1-test-app
-          image: docker.io/oescal/mec-mp1-app-test:latest
+          image: ghcr.io/oescal/mp1-test-app-mec:latest
           ports:
             - containerPort: 80
           env:

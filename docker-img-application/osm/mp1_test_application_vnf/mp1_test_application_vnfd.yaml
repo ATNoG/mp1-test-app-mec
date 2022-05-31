@@ -5,6 +5,8 @@ vnfd:
   provider: OSM
   version: '1.0'
   mgmt-cp: mgmt-net
+  df:
+  - id: default
   kdu:
   - name: mp1_test
     helm-chart: launch_mp1_test
