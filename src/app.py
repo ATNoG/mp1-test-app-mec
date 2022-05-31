@@ -22,16 +22,6 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301
 # USA
 
-# TODO:
-#  - This can be transformed into a framework.
-#
-# TODO:
-#  - remove hardcoded and environmental variable with a configurable
-#    page
-#
-# TODO:
-#  - README.md
-
 import os
 import json
 import requests
