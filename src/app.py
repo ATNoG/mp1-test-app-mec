@@ -2,6 +2,7 @@
 
 # unibo-test-application - Testbed for MEC API 011 applications
 # This application is part of unibo-test-mec
+# Copyright (C) 2022  IT: Miguel Mota   <miguel.mota@av.it.pt>
 # Copyright (C) 2020  Davide Berardi   <berardi.dav@gmail.com>
 #                     Davide Borsatti  <davide.borsatti@studio.unibo.it>
 #                     Franco Callegati <franco.callegati@unibo.it>
@@ -22,21 +23,12 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301
 # USA
 
-# TODO:
-#  - This can be transformed into a framework.
-#
-# TODO:
-#  - remove hardcoded and environmental variable with a configurable
-#    page
-#
-# TODO:
-#  - README.md
-
 import os
 import json
 import requests
 import datetime
 import subprocess
+import time
 from flask import Flask, Response, request
 
 def get_nic():
@@ -100,7 +92,6 @@ service_data = {
     },
     "version": "ServiceVersion1",
     "state": "ACTIVE",
-    "transportId": "Rest1",
     "transportInfo": {
         "id": 'TransId12345' ,
         "name": "REST",
@@ -124,7 +115,7 @@ service_data = {
     "serializer": "JSON",
     "scopeOfLocality": "MEC_SYSTEM",
     "consumedLocalOnly": True,
-    "isLocal": True
+    "isLocal": True,
 }
 
 # The application has been notified
@@ -489,4 +480,4 @@ if __name__=='__main__':
         # No configuration for now, will except when a request to an
         # invalid endpoint will be made.
         pass
-    app.run("0.0.0.0", port=80)
+    app.run("0.0.0.0", port=8090)
