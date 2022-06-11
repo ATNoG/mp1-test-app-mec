@@ -8,7 +8,7 @@
 		<!-- Bootstrap CSS -->
 		<link rel="stylesheet" href="bootstrap.min.css">
 
-		<title>UniBO Test MEC Application</title>
+		<title>IT Test MEC Application</title>
 		<style>
 			html {
 				background-color:#212529;
@@ -67,7 +67,7 @@
 	</head>
 	<body>
 		<div id="main" class="text-center">
-			<h1>UniBO Test MEC Application</h1>
+			<h1>IT Test MEC Application</h1>
 
 
 			<nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -78,21 +78,6 @@
 						</li>
 						<li id="navsubscriptions" class="nav-item">
 							<a class="nav-link" onclick="activate_menu('subscriptions')" href="#">Subscriptions</a>
-						</li>
-						<li id="navinteraction" class="nav-item">
-							<a class="nav-link" onclick="activate_menu('interaction')" href="#">Interactions with Apps</a>
-						</li>
-						<li id="navtransports" class="nav-item">
-							<a class="nav-link" onclick="activate_menu('transports')" href="#">Transports</a>
-						</li>
-						<li id="navdnsRules" class="nav-item">
-							<a class="nav-link" onclick="activate_menu('dnsRules')" href="#">DNS rules</a>
-						</li>
-						<li id="navtimings" class="nav-item">
-							<a class="nav-link" onclick="activate_menu('timings')" href="#">Timings</a>
-						</li>
-						<li id="navtrafficRules" class="nav-item">
-							<a class="nav-link" onclick="activate_menu('trafficRules')" href="#">Traffic Rules</a>
 						</li>
 						<li id="navconfiguration" class="nav-item">
 							<a class="nav-link" onclick="activate_menu('configuration') ; get_configuration()" href="#">Configuration</a>
@@ -108,8 +93,8 @@
 					   onclick="services()">Services</button>
 					<button type="button" class="btn btn-success btn-lg"
 					   onclick="service_subscribe()">Register</button>
-					<button type="button" class="btn btn-danger btn-lg"
-					   onclick="service_unsubscribe()">Unregister</button>
+					<button type="button" class="btr btn-secondary btn-lg"
+					   onclick="notify_ready()">Confirm Ready</button>
 				</div>
 				<div id="subscriptions" class="float-none d-none">
 					<br/>
@@ -117,12 +102,10 @@
 					<br/>
 					<button type="button" class="btn btn-primary btn-lg"
 					   onclick="notifications()">Subscriptions</button>
+					<button type="button" class="btr btn-info btn-lg"
+						onclick="get_subscriptions()">Subscription Info</button>
 					<button type="button" class="btn btn-success btn-lg"
 					   onclick="notification_subscribe()">Subscribe</button>
-					<button type="button" class="btn btn-danger btn-lg"
-					   onclick="notification_unsubscribe()">Unsubscribe</button>
-					<button type="button" class="btr btn-secondary btn-lg"
-					   onclick="notify_ready()">Confirm Ready</button>
 				</div>
 				<div id="interaction" class="float-none d-none">
 					<br/>
@@ -183,14 +166,14 @@
 			<form href="#">
 			    	<div class="form-group">
 			    		<label for="mec_base">MEC base address</label>
-			    		<input type="text" class="form-control" id="mec_base" placeholder="http://mec_base_address:80">
+			    		<input type="text" class="form-control" id="mec_base" placeholder="http://mec_base_address:8090">
 			    		<small id="mec_basehelp" class="form-text text-muted">Should be the complete endpoint without the /mec_ part</small>
 			    	</div>
 
 			    	<div class="form-group">
 			    		<label for="target_service">Target Service Name</label>
 			    		<input type="text" class="form-control" id="target_service"
-							placeholder="mMTCSlicingService">
+							placeholder="ITTestService">
 			    		<small id="target_servicehelp" class="form-text text-muted">
 											If empty or wrong the application will use the
 											Other Application URI value.
@@ -217,12 +200,12 @@
 			    	<div class="form-group">
 			    		<label for="service_data">Announced Service Data</label>
 							<textarea class="form-control" id="service_data"
-						   placeholder='{ "serName": "UniboMECService" }'></textarea>
+						   placeholder='{ "serName": "ITMECService" }'></textarea>
 			    		<small id="service_datahelp" class="form-text text-muted">
 											The service data that will get announced to the
 											MEC platform.
 							</small>
-			    	</div>
+			    	</div>	
 
 			    	<button type="submit" class="btn btn-primary" onclick="put_configuration()">Submit</button>
 			    </form>

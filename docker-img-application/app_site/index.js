@@ -45,6 +45,10 @@ var notification_subscribe = function() {
 	_get_query("notifications/subscribe")
 }
 
+var get_subscriptions = function(){
+	_get_query("subscriptions")
+}
+
 var notification_unsubscribe = function() {
 	_get_query("notifications/unsubscribe")
 }

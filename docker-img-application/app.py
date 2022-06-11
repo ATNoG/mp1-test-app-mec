@@ -73,6 +73,9 @@ other_application_uri=''
 # Service ID, this will be set by the MEC
 service_id = ''
 
+#subscription id
+notification_id = ''
+
 # Flask initialization.
 app = Flask(__name__)
 
@@ -88,9 +91,9 @@ target_service = ''
 
 # Default service data, this can be edited within the application
 service_data = {
-    "serName": "UniboMECService",
+    "serName": "ITMECService",
     "serCategory": {
-        "href": "/example/catalogue1",
+        "href": "http://10.0.0.0/example/catalogue1",
         "id": "id12345",
         "name": "RNI",
         "version": "v1"
@@ -105,10 +108,14 @@ service_data = {
         "type": "REST_HTTP",
         "protocol": "HTTP",
         "version": "2.0",
-        "endpoint": { EXTERNAL_ENDPOINT },
+        "endpoint": { 
+            "addresses":[
+                {"host":"192.168.47.43","port":8090}
+            ]
+        },
         "security": {
             "oAuth2Info": {
-                "grantTypes": [ ],
+                "grantTypes": ["OAUTH2_AUTHORIZATION_CODE"],
                 "tokenEndpoint": ""
             }
         },
@@ -143,10 +150,9 @@ def services():
     global app_instance_id
     global other_application_uri
     out = ''
-    query_base = "{}/{}/applications/{}/services".format(
+    query_base = "{}/{}/services".format(
             mec_base,
-            MEC_SERVICE_MGMT,
-            app_instance_id
+            MEC_SERVICE_MGMT
     )
 
     r = requests.get(query_base)
@@ -178,9 +184,22 @@ def service_subscribe():
     r = requests.post(query_base, data=json.dumps(data), headers=headers)
 
     # XXX we don't have any slash in the url?
-    service_id = r.headers['location'].split('/')[-1]
+    service_id = r.headers['Location'].split('/')[-2]
 
     return 'New service_id: {}'.format(service_id)
+
+@app.route('/subscriptions')
+def subscriptions():
+    global notification_id
+    query_base = "{}/{}/applications/{}/subscriptions/{}".format(
+            mec_base,
+            MEC_SERVICE_MGMT,
+            app_instance_id,
+            notification_id
+    )
+    
+    r = requests.get(query_base)
+    return r.text
 
 # Unsubscribe a service
 @app.route('/services/unsubscribe')
@@ -249,13 +268,11 @@ def notifications_subscribe():
     # Catch all notification endpoint
     data = {
       "subscriptionType": "SerAvailabilityNotificationSubscription",
-      "callbackReference": "string",
-      "_links": {
-        "self": {
-          "href": CALLBACK_URL
-        }
+      "callbackReference": f"http://192.168.47.43{CALLBACK_URL}:8090",
+      "filteringCriteria":{
+          "serNames":["OSM-TEST-APP"]
       }
-    }
+      }
 
     query_base = "{}/{}/applications/{}/subscriptions".format(
             mec_base,
@@ -267,8 +284,9 @@ def notifications_subscribe():
     r = requests.post(query_base, data=json.dumps(data), headers=headers)
 
     # XXX we don't have any slash in the url?
-    service_id = r.headers['location'].split('/')[-1]
-
+    service_id = r.headers['Location'].split('/')[-1]
+    global notification_id
+    notification_id = service_id
     return 'New notification_id: {}'.format(service_id)
 
 # Unsubscribe notifications
@@ -466,7 +484,7 @@ def configuration():
 if __name__=='__main__':
     try:
         app_instance_id = os.environ['APP_INSTANCE_ID']
-        mec_base = os.environ['MEC_BASE']
+        mec_base = "http://10.0.13.119:30080"
     except:
         # No configuration for now, will except when a request to an
         # invalid endpoint will be made.
