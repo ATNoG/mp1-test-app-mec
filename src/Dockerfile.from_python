@@ -1,0 +1,16 @@
+FROM python:3.10
+
+RUN useradd -m -d /home/mec_app mec_app
+WORKDIR /home/mec_app
+
+COPY app.py app.py
+COPY requirements.txt requirements.txt
+COPY app_site /var/www/
+
+RUN apt-get update
+
+
+USER mec_app
+RUN pip install -r requirements.txt
+
+CMD app.py --mongodb_addr 127.0.0.1 --mongodb_database mep
