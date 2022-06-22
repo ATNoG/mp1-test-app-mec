@@ -13,4 +13,4 @@ RUN apt-get update
 USER mec_app
 RUN pip install -r requirements.txt
 
-CMD app.py --mongodb_addr 127.0.0.1 --mongodb_database mep
+CMD python app.py

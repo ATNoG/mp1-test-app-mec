@@ -294,16 +294,19 @@ def notification_unsubscribe():
 
 @app.route('/notifications/notify_ready')
 def notification_confirm_ready():
-    query_base = "{}/{}/applications/{}/confirm_ready".format(
-            mec_base,
-            MEC_APP_SUPPORT,
-            app_instance_id
-    )
+    try:
+        query_base = "{}/{}/applications/{}/confirm_ready".format(
+                mec_base,
+                MEC_APP_SUPPORT,
+                app_instance_id
+        )
 
-    ready_indication = { "indication": "READY" }
-    headers = { 'content-type': 'application/json' }
+        ready_indication = { "indication": "READY" }
+        headers = { 'content-type': 'application/json' }
 
-    r = requests.post(query_base, data=json.dumps(ready_indication), headers=headers)
+        r = requests.post(query_base, data=json.dumps(ready_indication), headers=headers)
+    except Exception as e:
+        print(f"Could't connect to the database")
     return r.text
 
 # Time API
