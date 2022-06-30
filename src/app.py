@@ -475,7 +475,7 @@ def configuration():
 if __name__=='__main__':
     try:
         app_instance_id = os.environ['APP_INSTANCE_ID']
-        mec_base = "http://10.0.13.119:30080"
+        mec_base = "http://10.0.13.51:30080"
     except:
         # No configuration for now, will except when a request to an
         # invalid endpoint will be made.
