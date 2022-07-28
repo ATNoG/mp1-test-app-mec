@@ -1,0 +1,17 @@
+FROM archlinux:base-20220724.0.70393
+
+RUN useradd -m -d /home/mec_app mec_app
+WORKDIR /home/mec_app
+
+COPY app.py app.py
+COPY requirements.txt requirements.txt
+COPY app_site /var/www/
+
+RUN pacman -Syu --noconfirm
+RUN pacman -S --noconfirm python-pip
+
+
+USER mec_app
+RUN pip install -r requirements.txt
+
+CMD python app.py
